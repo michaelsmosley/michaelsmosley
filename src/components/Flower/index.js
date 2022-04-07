@@ -19,7 +19,7 @@ const Flower = ({
   contextValue,
   ...props
 }) => {
-  const { setCurrentSection, bloomInit, currentSection, setCurrentSubSection } =
+  const { setCurrentSection, bloomInit, currentSection, setCurrentSubSection, currentSubSection } =
     contextValue;
   const [hovered, setHover] = useState(false);
   const [bloomState, setBloomState] = useState(bloomInit);
@@ -28,6 +28,10 @@ const Flower = ({
   useEffect(() => {
     setBloomState(bloomInit);
   }, [bloomInit]);
+
+  useEffect(() => {
+    setBloomState(currentSubSection ? false : true);
+  }, [currentSubSection]);
 
   useEffect(() => {
     setFlowerDelay(0);
@@ -84,7 +88,6 @@ const Flower = ({
             delay={flowerDelay}
             bloomState={bloomState}
             hovered={hovered}
-            contextValue={contextValue}
           />
         ) : null;
       })}

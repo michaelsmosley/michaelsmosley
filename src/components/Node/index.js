@@ -10,10 +10,10 @@ import { animated, useSpring } from "@react-spring/three";
 import { useMatcapTexture } from "@react-three/drei";
 
 const Node = (props) => {
-  const { node, index, bloomState, delay, capTexture, contextValue, hovered } = props;
-  console.log("contextValue",contextValue)
-  const { currentSubSection } =
-    contextValue;
+  const { node, index, bloomState, delay, capTexture, hovered, physicalMaterial } = props;
+  // console.log("contextValue",contextValue)
+  // const { currentSubSection } =
+  //   contextValue;
   const [matcapTexture] = useMatcapTexture(
     capTexture ? capTexture : "2E763A_78A0B7_B3D1CF_14F209"
   );
@@ -29,13 +29,13 @@ const Node = (props) => {
     from: { scale: [0, 0, 0] },
     to: {
       scale: [
-        // bloomState ? node.scale.x * (hovered ? 1.15 : 1) : 0,
-        // bloomState ? node.scale.y * (hovered ? 1.15 : 1) : 0,
-        // bloomState ? node.scale.z * (hovered ? 1.15 : 1) : 0,
+        bloomState ? node.scale.x * (hovered ? 1.15 : 1) : 0,
+        bloomState ? node.scale.y * (hovered ? 1.15 : 1) : 0,
+        bloomState ? node.scale.z * (hovered ? 1.15 : 1) : 0,
 
-        currentSubSection ? 0 : bloomState ? node.scale.x * (hovered ? 1.15 : 1) : 0,
-        currentSubSection ? 0 : bloomState ? node.scale.y * (hovered ? 1.15 : 1) : 0,
-        currentSubSection ? 0 : bloomState ? node.scale.z * (hovered ? 1.15 : 1) : 0,
+        // currentSubSection ? 0 : bloomState ? node.scale.x * (hovered ? 1.15 : 1) : 0,
+        // currentSubSection ? 0 : bloomState ? node.scale.y * (hovered ? 1.15 : 1) : 0,
+        // currentSubSection ? 0 : bloomState ? node.scale.z * (hovered ? 1.15 : 1) : 0,
       ],
     },
     config: {
@@ -57,9 +57,10 @@ const Node = (props) => {
       position={node.position}
       rotation={node.rotation}
     >
-      {/* <meshStandardMaterial roughness={0.5} /> */}
 
-      <meshMatcapMaterial matcap={matcapTexture} opacity={1} color="#14CEFF" />
+      {physicalMaterial ? (<meshPhysicalMaterial {...physicalMaterial} />) : (<meshMatcapMaterial matcap={matcapTexture} opacity={1} color="#14CEFF" /> )}
+      
+
     </animated.mesh>
   );
 };

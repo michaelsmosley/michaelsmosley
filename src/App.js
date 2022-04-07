@@ -6,6 +6,7 @@ import Context from "./context";
 
 import Sections from "./components/Sections";
 import Floor from "./components/Floor";
+import Button from "./components/Button";
 
 // import myFont from './fonts/font3.json'
 // import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
@@ -16,7 +17,7 @@ import Title from "./components/Title";
 // import { ThinFilmFresnelMap } from './utils/ThinFilmFresnelMap'
 // import useSlerp from './utils/use-slerp'
 
-import "./app.css";
+// import "./app.css";
 //useMatcapTexture,
 
 import { OrbitControls } from "@react-three/drei";
@@ -48,11 +49,9 @@ function App() {
     currentSection: currentSection,
     setCurrentSection: setCurrentSection,
     currentSubSection: currentSubSection,
-    setCurrentSubSection: setCurrentSubSection
+    setCurrentSubSection: setCurrentSubSection,
   };
   const controlsRef = useRef();
-
-
 
   return (
     <Context.Provider value={contextValue}>
@@ -73,6 +72,12 @@ function App() {
             shadow-camera-top={20}
             shadow-camera-bottom={-20}
           />
+                    {/* <directionalLight
+            position={[-10, -40, -30]}
+            intensity={.5}
+            castShadow
+
+          /> */}
           {/* <mesh castShadow receiveShadow  position={[3, 2, 0]}>
           <boxGeometry args={[2, 2, 2]}/>
           <meshStandardMaterial />
@@ -90,14 +95,22 @@ function App() {
         </mesh> */}
 
           <group name="text" position={[0, 0, 60]} rotation={[0, -Math.PI, 0]}>
-            <Title
-              layers={[0]}
-              name="title"
-              contextValue={contextValue}
-            />
+            <Title layers={[0]} name="title" contextValue={contextValue} />
           </group>
-          <Floor contextValue={contextValue}/>
-          <OrbitControls ref={controlsRef} enableZoom={false} makeDefault maxPolarAngle = {Math.PI/2-.1}/>
+          <Button
+            contextValue={contextValue}
+            position={[0, 3, 0]}
+            rotation={[-Math.PI/2, 0, 0]}
+            physicalMaterial = {{color:"#71f604", reflectivity:.7, roughness:.2, metalness:0}}
+          />
+          <Floor contextValue={contextValue} />
+          <OrbitControls
+            ref={controlsRef}
+            enableRotate={currentSubSection ? true : true}
+            enableZoom={false}
+            makeDefault
+            maxPolarAngle={Math.PI / 2 - 0.1}
+          />
         </Canvas>
       </div>
     </Context.Provider>

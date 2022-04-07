@@ -19,6 +19,17 @@ export default function Floor(props) {
     delay: currentSubSection || currentSection ? 0 : 1000,
   });
 
+  const planeStyle = useSpring({
+    from: { color: "#049ef4" },
+    to: {
+      color: currentSubSection ? "#59b160" : "#049ef4",
+    },
+    config: {
+      friction: 50,
+    },
+    delay: 0,
+  });
+
   return (
     <animated.mesh
       {...spring}
@@ -32,8 +43,9 @@ export default function Floor(props) {
         args={[2000, 2000]}
         side={THREE.DoubleSide}
       />
-      <meshPhysicalMaterial
-        color={"#049ef4"}
+      <animated.meshPhysicalMaterial
+        // color={"#049ef4"}
+        {...planeStyle}
         reflectivity={1}
         roughness={0.555}
         metalness={1}

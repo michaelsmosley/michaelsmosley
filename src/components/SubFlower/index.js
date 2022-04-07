@@ -6,13 +6,17 @@ import useLayers from '../../utils/use-layers'
 
 const SmallFlower = ({ id, name, key, item, layers, glb, position, subFlowerLength, thisSection, contextValue, ...props }) => {
     const [bloomState, setBloomState] = useState(false)
-    const { currentSection, setCurrentSubSection } =
+    const { currentSection, setCurrentSubSection, currentSubSection } =
     contextValue;
     const [hovered, setHover] = useState(false)
     useEffect(() => void (document.body.style.cursor = hovered ? "pointer" : "auto"), [hovered])
     useEffect(() => {
         setBloomState(currentSection===thisSection ? true : false)
     }, [currentSection]);
+
+    useEffect(() => {
+        setBloomState(currentSubSection ? false : currentSection===thisSection ? true : false);
+      }, [currentSubSection]);
     const onClick = (event, value) => {
         //   e.preventDefault();
         event.stopPropagation();
@@ -45,7 +49,7 @@ const SmallFlower = ({ id, name, key, item, layers, glb, position, subFlowerLeng
             {Object.values(nodes).map((node, index) => {
                 const meshGeometry = node.geometry
                 return meshGeometry ? (
-                    <Node key={index} node={node} index={index} delay={0} bloomState={bloomState} contextValue={contextValue} capTexture={ '2E763A_78A0B7_B3D1CF_14F209'} />
+                    <Node key={index} node={node} index={index} delay={0} bloomState={bloomState} capTexture={ '2E763A_78A0B7_B3D1CF_14F209'} />
 
                 ) : null
             })}

@@ -13,7 +13,6 @@ const SubSections = (props) => {
   const subArray = ["one", "two", "three", "four", "five"];
 
   const layers = [0, 11];
-  console.log("subsections props", props);
   // useEffect(() => {
   //   console.log("bloominit updated", bloomInit)
   // }, [bloomInit]);

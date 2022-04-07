@@ -42,6 +42,11 @@ const Sections = (props) => {
     cameraFOV: 100,
     cameraLookAt: [0, 0, 0],
   };
+  const topCameraProps = {
+    cameraPosition: [0, 0, -25],
+    cameraFOV: 100,
+    cameraLookAt: [0, 0, 0],
+  };
   const initCameraProps = {
     cameraPosition: [0, 0, -25],
     cameraFOV: 100,
@@ -49,7 +54,7 @@ const Sections = (props) => {
   };
   useFrame((state) => {
     if (!dragging) {
-      let sectionData = currentSubSection ? defaultCameraProps : currentSection
+      let sectionData = currentSubSection ? topCameraProps : currentSection
         ? sectionsData.sections[currentSection - 1]
         : bloomInit
         ? defaultCameraProps
