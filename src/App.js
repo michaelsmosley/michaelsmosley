@@ -7,6 +7,7 @@ import Context from "./context";
 import Sections from "./components/Sections";
 import Floor from "./components/Floor";
 import Button from "./components/Button";
+import Menu from "./components/Menu";
 
 // import myFont from './fonts/font3.json'
 // import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
@@ -55,9 +56,12 @@ function App() {
 
   return (
     <Context.Provider value={contextValue}>
+      <div className="main">
+      <div className="dom-container">
+        <Menu />
+      </div>
       <div className="canvas-container">
         {/* <SpringTest /> */}
-
         <Canvas shadows camera={{ position: [0, 6, -25], fov: 95 }}>
           <ambientLight intensity={0.1} />
           <directionalLight
@@ -106,12 +110,13 @@ function App() {
           <Floor contextValue={contextValue} />
           <OrbitControls
             ref={controlsRef}
-            enableRotate={currentSubSection ? true : true}
+            enableRotate={currentSubSection ? false : true}
             enableZoom={false}
             makeDefault
             maxPolarAngle={Math.PI / 2 - 0.1}
           />
         </Canvas>
+      </div>
       </div>
     </Context.Provider>
   );

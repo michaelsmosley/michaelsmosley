@@ -57,6 +57,10 @@ const Flower = ({
 
   const onPointerOver = useCallback(() => setHover(true), []);
   const onPointerOut = useCallback(() => setHover(false), []);
+
+  const onPointerDown = useCallback(() => setHover(true), []);
+  const onPointerUp = useCallback(() => setHover(false), []);
+  
   const ref = useLayers(layers);
   useFrame(() => {
     if (ref.current) {
@@ -74,6 +78,8 @@ const Flower = ({
       {...props}
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
+      onPointerDown={onPointerDown}
+      onPointerUp={onPointerUp}
       onClick={(e) => {
         onClick(e, section);
       }}
