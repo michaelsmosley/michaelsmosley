@@ -19,7 +19,7 @@ const SubSections = (props) => {
 
   const r = 10;
   const totalPoints = subArray.length;
-  const theta = (Math.PI * 2) / totalPoints;
+  const theta = -1* (Math.PI ) / totalPoints;
 
   const xPos = (currentPoint) => {
     var angle = theta * currentPoint;

@@ -8,7 +8,7 @@ export const sectionsData = {
         glb:'flower',
         section:'that one',
         rotationSpeed: .35,
-        cameraPosition: [5, 20, -18],
+        cameraPosition: [5, 10, -18],
         cameraFOV: 25,
         cameraLookAt: [0,0,0]
   
@@ -21,9 +21,9 @@ export const sectionsData = {
         glb:'flower',
         section:'check this',
         rotationSpeed: .75,
-        cameraPosition: [-8, 10, -10],
+        cameraPosition: [-8, 13, -10],
         cameraFOV: 85,
-        cameraLookAt: [-15, 0, 6]
+        cameraLookAt: [-20, 0, 6]
   
       },
       {
@@ -34,7 +34,7 @@ export const sectionsData = {
         glb:'flower',
         section:'another',
         rotationSpeed: .15,
-        cameraPosition: [3, 5, -30],
+        cameraPosition: [3, 15, -30],
         cameraFOV: 100,
         cameraLookAt: [0,0,0]
       },
@@ -46,7 +46,7 @@ export const sectionsData = {
         glb:'flower',
         section:'this one',
         rotationSpeed: .5,
-        cameraPosition: [10, 6, -25],
+        cameraPosition: [10, 12, -25],
         cameraFOV: 20,
         cameraLookAt: [8,0,0]
       },
@@ -58,7 +58,7 @@ export const sectionsData = {
         glb:'flower',
         section:'over here',
         rotationSpeed: .25,
-        cameraPosition: [-15, 5, -30],
+        cameraPosition: [-15, 12, -30],
         cameraFOV: 45,
         cameraLookAt: [-8,0,0]
       }
