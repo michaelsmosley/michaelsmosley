@@ -30,7 +30,7 @@ const Flower = ({
   }, [bloomInit]);
 
   useEffect(() => {
-    setBloomState(currentSubSection ? false : true);
+    setBloomState(currentSubSection ? false : currentSection === id || currentSection === 0 ? true : false);
   }, [currentSubSection]);
 
   useEffect(() => {

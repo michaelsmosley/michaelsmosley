@@ -3,16 +3,17 @@ import styles from "./menu.module.scss"; // Import css modules stylesheet as sty
 import { sectionsData as sectionsData } from "../../data/data";
 
 const Menu = ({ contextValue }) => {
-  const { setCurrentSection } = contextValue;
+  const { setCurrentSection, currentSection, setBloomInit } = contextValue;
   const [active, setActive] = useState(false);
   const onClick = () => {
-    console.log("click on menu");
     setActive(!active);
   };
   const clickSection = (value) => {
-    console.log("clickSection on menu", value);
-    setCurrentSection(value);
-    setActive(false);
+    if (currentSection !== value) {
+      setCurrentSection(value);
+      setActive(false);
+      setBloomInit(true);
+    }
   };
   return (
     <div id={styles.menu}>
@@ -34,13 +35,29 @@ const Menu = ({ contextValue }) => {
 
       <nav id="nav" className={`${active ? styles.show : null}`}>
         <ul>
-          <li onClick={() => clickSection(0)}>HOME</li>
+          <li
+            className={currentSection === 0 ? styles.disable : null}
+            onClick={() => clickSection(0)}
+          >
+            HOME
+          </li>
 
           {sectionsData.sections.map((section, index) => {
             return (
-              <li onClick={() => clickSection(index + 1)}>{section.section}</li>
+              <li
+                className={currentSection === index + 1 ? styles.disable : null}
+                onClick={() => clickSection(index + 1)}
+              >
+                <nobr>{section.section}</nobr>
+              </li>
             );
           })}
+
+          <li>
+            <a href="http://google.com" target="_blank" onClick={(()=> console.log("clicked"))}>
+              Click me
+            </a>
+          </li>
         </ul>
       </nav>
 

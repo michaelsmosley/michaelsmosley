@@ -1,11 +1,37 @@
+@font-face {
+  font-family: "Monoton";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Monoton"), local("Monoton-Regular"),
+    url(https://fonts.gstatic.com/s/monoton/v10/5h1aiZUrOngCibe4TkHLRA.woff)
+      format("woff");
+}
+
 #menu {
   width: 100%;
   height: 100%;
   // background: #e74c3c;
   position: absolute;
   overflow: auto;
+  font-family: Monoton;
 }
-
+a {
+  text-decoration: none;
+}
+a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+a:hover {
+  text-decoration: none;
+}
+a:focus {
+  text-decoration: none;
+}
+a:hover,
+a:active {
+  text-decoration: none;
+}
 .icon1,
 .icon2,
 .icon3 {
@@ -76,7 +102,7 @@
 nav {
   border-right: 2px solid #005899;
   background-color: rgb(143, 170, 88);
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   height: 100%;
@@ -88,17 +114,38 @@ nav {
   transition-delay: 100ms;
   ul {
     margin: 0;
+    padding: 0;
+    // vertical-align: middle;
+    // line-height: 70px;
     position: absolute;
-    top: 30%;
-    left: 20%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     li {
+      transition: all 0.5s ease;
+      // transition-timing-function: ease-in-out;
+      cursor: pointer;
+      &.disable {
+        cursor: none;
+        color: #636363 !important;
+        &:hover {
+          transform: none;
+          // color: 'white';
+        }
+      }
       list-style: none;
-      font-size: 24px;
-      color: #fff;
+      font-size: 30px;
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+      color: #005899;
       line-height: 2.2;
       text-transform: uppercase;
       letter-spacing: 1.7px;
-
+      &:hover {
+        transform: scale(1.2);
+        color: "white";
+      }
       &:before {
       }
     }
@@ -109,9 +156,13 @@ nav.show {
   //  opacity: 0;
   // animation: slideIn 0.6s cubic-bezier(.62,.04,.3,1.56);
   // animation-fill-mode: forwards;
-  width: 30%;
+  width: 50%;
   // transform:scale(1);
   opacity: 1;
+
+  @media (max-width: 912px) {
+    width: 100%;
+  }
 }
 
 .darkblue {
@@ -146,16 +197,16 @@ nav.show {
   }
 }
 
-.content {
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  width: 100%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  h1 {
-    font-size: 70px;
-    animation: shotup 600ms ease-in-out;
-    animation-delay: 300ms;
-  }
-}
+// .content {
+//   position: absolute;
+//   top: 10%;
+//   left: 10%;
+//   width: 100%;
+//   transform: translate(-50%, -50%);
+//   text-align: center;
+//   h1 {
+//     font-size: 70px;
+//     animation: shotup 600ms ease-in-out;
+//     animation-delay: 300ms;
+//   }
+// }
