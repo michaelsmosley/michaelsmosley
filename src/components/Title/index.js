@@ -1,4 +1,4 @@
-import * as THREE from "three";
+// import * as THREE from "three";
 import React, {
   useMemo,
   useRef,
@@ -20,10 +20,7 @@ import {
 // import Context from '../../context/Context';
 import { animated, useSpring } from "@react-spring/three";
 
-const TEXT_PROPS = {
-  fontSize: 20,
-  font: "https://fonts.gstatic.com/s/monoton/v10/5h1aiZUrOngCibe4TkHLRA.woff",
-};
+
 export default function Title(props) {
   // const context = useContext(Context)
   // console.log("context",context)
@@ -32,9 +29,12 @@ export default function Title(props) {
 
   const AnimatedText = animated(Text);
   const { contextValue } = props;
-  const { setBloomInit, setCurrentSection, bloomInit, setCurrentSubSection } =
+  const { setBloomInit, setCurrentSection, bloomInit, isMobile } =
     contextValue;
-
+    const TEXT_PROPS = {
+      fontSize: isMobile ? 11 : 20,
+      font: "https://fonts.gstatic.com/s/monoton/v10/5h1aiZUrOngCibe4TkHLRA.woff",
+    };
   const [hovered, setHover] = useState(false);
   // const group = useSlerp()
   const onClick = (e) => {
@@ -53,7 +53,7 @@ export default function Title(props) {
 
   const spring = useSpring({
     from: { position: [0, -20, 0] },
-    to: { position: [0, 11, bloomInit ? -100 : 0] },
+    to: { position: [0, isMobile ? 8 : 11, bloomInit ? -100 : 0] },
     config: {
       friction: 100,
     },

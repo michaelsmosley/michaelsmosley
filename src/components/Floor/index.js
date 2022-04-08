@@ -11,7 +11,12 @@ export default function Floor(props) {
   const spring = useSpring({
     from: { rotation: [-Math.PI, 0, 0] },
     to: {
-      rotation: [currentSubSection && currentSection ? -Math.PI : -Math.PI / 2, 0, 0],
+      rotation: [
+        currentSubSection && currentSection ? -Math.PI : -Math.PI / 2,
+        0,
+        0,
+      ],
+
     },
     config: {
       friction: 50,
@@ -44,7 +49,7 @@ export default function Floor(props) {
         side={THREE.DoubleSide}
       />
       <animated.meshPhysicalMaterial
-        // color={"#049ef4"}
+        // color={"#336699"}
         {...planeStyle}
         reflectivity={1}
         roughness={0.555}

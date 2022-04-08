@@ -14,8 +14,7 @@ const Sections = (props) => {
   const { bloomInit, contextValue, controlsRef } = props;
   const {
     currentSection,
-    // setCurrentSection,
-    // setCurrentSubSection,
+    isMobile,
     currentSubSection,
   } = contextValue;
   const [dragging, setDragging] = useState(false);
@@ -35,6 +34,10 @@ const Sections = (props) => {
       };
     }
   }, [controlsRef]);
+
+
+
+
 
   const layers = [0, 11];
   const defaultCameraProps = {
@@ -73,7 +76,7 @@ const Sections = (props) => {
         ),
         0.05
       );
-      // state.camera.lookAt(0, 10, 0);
+      // state.camera.lookAt(sectionData.cameraLookAt);
       // state.camera.updateProjectionMatrix();
     }
   });
