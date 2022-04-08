@@ -15,7 +15,7 @@ const Sections = (props) => {
   const {
     currentSection,
     // setCurrentSection,
-    setCurrentSubSection,
+    // setCurrentSubSection,
     currentSubSection,
   } = contextValue;
   const [dragging, setDragging] = useState(false);

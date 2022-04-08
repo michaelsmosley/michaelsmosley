@@ -51,7 +51,7 @@ const Flower = ({
     event.stopPropagation();
     console.log("onclick flower", event);
     setCurrentSection(id === currentSection ? 0 : id);
-    setCurrentSubSection(0);
+    // setCurrentSubSection(0);
   };
 
 
@@ -60,7 +60,7 @@ const Flower = ({
 
   const onPointerDown = useCallback(() => setHover(true), []);
   const onPointerUp = useCallback(() => setHover(false), []);
-  
+
   const ref = useLayers(layers);
   useFrame(() => {
     if (ref.current) {

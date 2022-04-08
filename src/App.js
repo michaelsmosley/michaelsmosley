@@ -1,48 +1,20 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Canvas, extend } from "@react-three/fiber";
 import Context from "./context";
-// import { useSpring, animated } from "react-spring";
-// import * as THREE from "three";
-
 import Sections from "./components/Sections";
 import Floor from "./components/Floor";
 import Button from "./components/Button";
 import Menu from "./components/Menu";
-
-// import myFont from './fonts/font3.json'
-// import { FontLoader } from 'three/examples/jsm/loaders/FontLoader'
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import Title from "./components/Title";
-
-// import useRenderTarget from './utils/use-render-target'
-// import { ThinFilmFresnelMap } from './utils/ThinFilmFresnelMap'
-// import useSlerp from './utils/use-slerp'
-
-// import "./app.css";
-//useMatcapTexture,
-
 import { OrbitControls } from "@react-three/drei";
-// import { CircleBufferGeometry } from 'three';
+
 extend({ TextGeometry });
 
 function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [currentSubSection, setCurrentSubSection] = useState(0);
-
   const [bloomInit, setBloomInit] = useState(false);
-
-  // const [toggle, set] = useState(0)
-  // const props = useSpring({ to: { opacity: 1, color: 'red' } })
-
-  // const [{ x }] = useSpring({ x: toggle, config: { mass: 5, tension: 1000, friction: 50, precision: 0.0001 } }, [toggle])
-
-  // const styles = useSpring({
-  //   to: async (next, cancel) => {
-  //     await next({ opacity: 1, color: '#ffaaee' })
-  //     await next({ opacity: 0, color: 'rgb(14,26,19)' })
-  //   },
-  //   from: { opacity: 0, color: 'red' },
-  // })
 
   const contextValue = {
     setBloomInit: setBloomInit,
@@ -54,11 +26,17 @@ function App() {
   };
   const controlsRef = useRef();
 
+
+  useEffect(() => {
+    setCurrentSubSection(0)
+  }, [currentSection]);
+
+
   return (
     <Context.Provider value={contextValue}>
       <div className="main">
       <div className="dom-container">
-        <Menu />
+        <Menu contextValue={contextValue}/>
       </div>
       <div className="canvas-container">
         {/* <SpringTest /> */}
