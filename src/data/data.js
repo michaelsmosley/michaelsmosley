@@ -15,15 +15,15 @@ export const sectionsData = {
       },
       {
         args: [1.799233278635274, 1.9642524560408021, 0.05],
-        position: [-19.325473394997085, 0, 8.530151273151705],
+        position: [-14.325473394997085, 0, 8.530151273151705],
         rotation: [0,0,0],
         scale:[.6,.6,.6],
         glb:'flower',
         section:'check this',
         rotationSpeed: .75,
-        cameraPosition: [-8, 13, -10],
-        cameraFOV: 85,
-        cameraLookAt: [-20, 0, 6]
+        cameraPosition: [-10, 13, -10],
+        cameraFOV: 55,
+        cameraLookAt: [-14, 0, 6]
   
       },
       {
@@ -52,15 +52,15 @@ export const sectionsData = {
       },
       {
         args: [1.7446126775638997, 2.6211835436253392, 0.05],
-        position: [-9.826056860647832, 0, -10.4685371584057485],
+        position: [-6.826056860647832, 0, -10.4685371584057485],
         rotation: [0,0,0],
         scale:[.65,.65,.65],
         glb:'flower',
         section:'over here',
         rotationSpeed: .25,
-        cameraPosition: [-15, 12, -30],
+        cameraPosition: [-14, 12, -30],
         cameraFOV: 45,
-        cameraLookAt: [-8,0,0]
+        cameraLookAt: [-6,0,-10]
       }
     ]
   }
