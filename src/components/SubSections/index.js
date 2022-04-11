@@ -51,7 +51,7 @@ const SubSections = (props) => {
               bloomInit={bloomInit}
               height={4}
               hideIfNotCurrent={true}
-              capTexture={'7A7A7A_D0D0D0_BCBCBC_B4B4B4'}
+              capTexture={'04E804_04B504_04CB04_33FC33'}
               contextValue={contextValue}
             />
             <SubFlower

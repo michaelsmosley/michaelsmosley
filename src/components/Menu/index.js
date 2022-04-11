@@ -3,15 +3,14 @@ import styles from "./menu.module.scss"; // Import css modules stylesheet as sty
 import { sectionsData as sectionsData } from "../../data/data";
 
 const Menu = ({ contextValue }) => {
-  const { setCurrentSection, currentSection, setBloomInit } = contextValue;
-  const [active, setActive] = useState(false);
+  const { setCurrentSection, currentSection, setBloomInit, menuActive, setMenuActive } = contextValue;
   const onClick = () => {
-    setActive(!active);
+    setMenuActive(!menuActive);
   };
   const clickSection = (value) => {
     if (currentSection !== value) {
       setCurrentSection(value);
-      setActive(false);
+      setMenuActive(false);
       setBloomInit(true);
     }
   };
@@ -19,21 +18,21 @@ const Menu = ({ contextValue }) => {
     <div id={styles.menu}>
       <div className={styles.hamburgericon} onClick={onClick} id="icon">
         <div
-          className={`${styles.icon1} ${active ? styles.a : null}`}
+          className={`${styles.icon1} ${menuActive ? styles.a : null}`}
           id="a"
         ></div>
         <div
-          className={`${styles.icon2} ${active ? styles.c : null}`}
+          className={`${styles.icon2} ${menuActive ? styles.c : null}`}
           id="b"
         ></div>
         <div
-          className={`${styles.icon3} ${active ? styles.b : null}`}
+          className={`${styles.icon3} ${menuActive ? styles.b : null}`}
           id="c"
         ></div>
         <div className={styles.clear}></div>
       </div>
 
-      <nav id="nav" className={`${active ? styles.show : null}`}>
+      <nav id="nav" className={`${menuActive ? styles.show : null}`}>
         <ul>
           <li
             className={currentSection === 0 ? styles.disable : null}
@@ -54,7 +53,11 @@ const Menu = ({ contextValue }) => {
           })}
 
           <li>
-            <a href="http://google.com" target="_blank" onClick={(()=> console.log("clicked"))}>
+            <a
+              href="http://google.com"
+              target="_blank"
+              onClick={() => console.log("clicked")}
+            >
               Click me
             </a>
           </li>
@@ -62,7 +65,7 @@ const Menu = ({ contextValue }) => {
       </nav>
 
       <div
-        className={`${styles.darkblue} ${active ? styles.slide : null}`}
+        className={`${styles.darkblue} ${menuActive ? styles.slide : null}`}
         id="blue"
       ></div>
     </div>

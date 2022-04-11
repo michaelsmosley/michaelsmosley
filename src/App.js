@@ -16,6 +16,8 @@ function App() {
   const [currentSection, setCurrentSection] = useState(0);
   const [currentSubSection, setCurrentSubSection] = useState(0);
   const [bloomInit, setBloomInit] = useState(false);
+  const [menuActive, setMenuActive] = useState(false);
+
   const [cameraTarget, setCameraTarget] = useState([0, 0, 0]);
   var windowWidth =
     window.screen.width < window.outerWidth
@@ -30,6 +32,8 @@ function App() {
     currentSubSection: currentSubSection,
     setCurrentSubSection: setCurrentSubSection,
     isMobile: isMobile,
+    menuActive: menuActive,
+    setMenuActive: setMenuActive
   };
   const controlsRef = useRef();
 
@@ -40,8 +44,12 @@ function App() {
         ? sectionsData.sections[currentSection - 1].cameraLookAt
         : [0, 0, 0]
     );
+    setMenuActive(false)
   }, [currentSection]);
 
+  useEffect(() => {
+    setMenuActive(false)
+  }, [currentSubSection]);
   return (
     <Context.Provider value={contextValue}>
       <div className="main">

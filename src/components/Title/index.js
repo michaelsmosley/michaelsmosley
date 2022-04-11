@@ -1,25 +1,24 @@
 // import * as THREE from "three";
 import React, {
-  useMemo,
-  useRef,
-  useLayoutEffect,
+  // useMemo,
+  // useRef,
+  // useLayoutEffect,
   useEffect,
   useState,
   useCallback,
-  useContext,
+  // useContext,
 } from "react";
 // import { extend, useLoader } from '@react-three/fiber'
 import {
   Text,
   useMatcapTexture,
-  Octahedron,
-  useGLTFLoader,
-  FlyControls,
+  // Octahedron,
+  // useGLTFLoader,
+  // FlyControls,
 } from "@react-three/drei";
 // import useSlerp from '../../utils/use-slerp'
 // import Context from '../../context/Context';
 import { animated, useSpring } from "@react-spring/three";
-
 
 export default function Title(props) {
   // const context = useContext(Context)
@@ -29,18 +28,18 @@ export default function Title(props) {
 
   const AnimatedText = animated(Text);
   const { contextValue } = props;
-  const { setBloomInit, setCurrentSection, bloomInit, isMobile } =
-    contextValue;
-    const TEXT_PROPS = {
-      fontSize: isMobile ? 11 : 20,
-      font: "https://fonts.gstatic.com/s/monoton/v10/5h1aiZUrOngCibe4TkHLRA.woff",
-    };
+  const { setBloomInit, setCurrentSection, bloomInit, isMobile, setMenuActive } = contextValue;
+  const TEXT_PROPS = {
+    fontSize: isMobile ? 11 : 20,
+    font: "https://fonts.gstatic.com/s/monoton/v10/5h1aiZUrOngCibe4TkHLRA.woff",
+  };
   const [hovered, setHover] = useState(false);
   // const group = useSlerp()
   const onClick = (e) => {
     console.log("click title", e);
     setBloomInit(true);
     setCurrentSection(0);
+    setMenuActive(false)
     // setCurrentSubSection(0)
   };
   useEffect(
