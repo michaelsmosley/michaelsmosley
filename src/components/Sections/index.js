@@ -1,21 +1,24 @@
 import React, { useEffect, useState } from "react";
 // import * as Styles from './sections.module.scss';
 import Flower from "../Flower";
+
 import SubSections from "../SubSections";
 import SectionTitle from "../SectionTitle";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-import { sectionsData as sectionsData } from "../../data/data";
+// import { sectionsData as sectionsData } from "../../data/data";
 // import Context from '../../context';
 
 const Sections = (props) => {
+
   // const context = useContext(Context)
   const { bloomInit, contextValue, controlsRef } = props;
   const {
     currentSection,
     isMobile,
     currentSubSection,
+    contentfulData
   } = contextValue;
   const [dragging, setDragging] = useState(false);
 
@@ -23,7 +26,6 @@ const Sections = (props) => {
     if (controlsRef.current) {
       const controls = controlsRef.current;
       const callback = (event) => {
-        console.log("event", event.type);
         setDragging(event.type === "start" ? true : false);
       };
       controls.addEventListener("start", callback);
@@ -57,8 +59,14 @@ const Sections = (props) => {
   };
   useFrame((state) => {
     if (!dragging) {
+      var index =
+      currentSection === 0
+        ? 0
+        : contentfulData.findIndex(
+            (section) => section.sys.id === currentSection
+          );
       let sectionData = currentSubSection ? topCameraProps : currentSection
-        ? sectionsData.sections[currentSection - 1]
+        ? contentfulData[index]
         : bloomInit
         ? defaultCameraProps
         : initCameraProps;
@@ -83,20 +91,22 @@ const Sections = (props) => {
 
   return (
     <group name="sections">
-      {sectionsData.sections.map((section, index) => {
+      {contentfulData.map((section, index) => {
+   
+
         return (
-          <group name="section">
+          <group key={index} name="section">
             <SectionTitle
               section={section}
               currentSection={currentSection}
-              thisSection={index + 1}
+              thisSection={section.sys.id}
               bloomInit={bloomInit}
               contextValue={contextValue}
             />
             <Flower
               key={index + 1}
-              id={index + 1}
-              name={`flower-${index + 1}`}
+              id={section.sys.id}
+              name={section.title}
               {...section}
               layers={layers}
               delay={index * 200}
@@ -107,7 +117,7 @@ const Sections = (props) => {
               // currentSubSection={currentSubSection}
               // setCurrentSubSection={setCurrentSubSection}
               {...section}
-              thisSection={index + 1}
+              thisSection={section.sys.id}
               // bloomInit={bloomInit}
               contextValue={contextValue}
             />

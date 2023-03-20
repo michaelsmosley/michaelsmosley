@@ -39,17 +39,11 @@ const Button = ({
 
   const onPointerOver = useCallback(() => setHover(true), []);
   const onPointerOut = useCallback(() => setHover(false), []);
-  // const ref = useLayers(layers)
-  // useFrame(() => {
-  //     if (ref.current) {
-  //         ref.current.rotation.y -= 0.01 * .6
-  //     }
-  // })
 
   const { nodes } = useGLTF(
     process.env.PUBLIC_URL + "/glb/" + (glb ? glb : "button") + ".glb"
   );
-  console.log("nodes", nodes);
+
   return (
     <group
     //   scale={[1, 1, 1]}

@@ -8,7 +8,8 @@ import SectionTitle from "../SectionTitle";
 
 const SubSections = (props) => {
   // const context = useContext(Context)
-  const { position, thisSection, scale, contextValue } = props;
+  const { position, thisSection, scale, contextValue, itemsCollection } = props;
+  // console.log("itemsCollection",itemsCollection)
   const {currentSection, bloomInit,  setCurrentSubSection, currentSubSection,}= contextValue
   const subArray = ["one", "two", "three", "four", "five"];
 
@@ -33,12 +34,15 @@ const SubSections = (props) => {
 
   return (
     <group name="subflowers">
-      {subArray.map((item, index) => {
+      {itemsCollection.map((item, index) => {
+
+// console.log("item",item)
+// console.log("index",index)
         return (
-          <>
+          <group key={index}>
             <SectionTitle
               section={{
-                section: item,
+                ...item,
                 position: [
                   xPos(index) + position[0],
                   position[1],
@@ -57,8 +61,15 @@ const SubSections = (props) => {
             <SubFlower
               key={index + 1}
               id={index + 1}
-              name={`subflower-${index + 1}`}
+              name={item.job
+                ? item.job.sys.id
+                : item.project
+                ? item.project.sys.id
+                : item.skill
+                ? item.skill.sys.id
+                : item.photo ? item.photo.sys.id : 0}
               {...item}
+              content={item}
               layers={layers}
               position={[
                 xPos(index) + position[0],
@@ -72,7 +83,7 @@ const SubSections = (props) => {
               setCurrentSubSection={setCurrentSubSection}
               contextValue={contextValue}
             />
-          </>
+          </group>
         );
       })}
     </group>

@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 import styles from "./menu.module.scss"; // Import css modules stylesheet as styles
-import { sectionsData as sectionsData } from "../../data/data";
 
 const Menu = ({ contextValue }) => {
-  const { setCurrentSection, currentSection, setBloomInit, menuActive, setMenuActive } = contextValue;
+  const { setCurrentSection, setCurrentSubSection, currentSection, setBloomInit, menuActive, setMenuActive, contentfulData } = contextValue;
   const onClick = () => {
     setMenuActive(!menuActive);
   };
   const clickSection = (value) => {
-    if (currentSection !== value) {
+    // console.log("currentSection", currentSection);
+    // if (currentSection !== value) {
+      // setCurrentSubSectionContent(null);
+      setCurrentSubSection(0);
+
       setCurrentSection(value);
       setMenuActive(false);
       setBloomInit(true);
-    }
+    // }
   };
   return (
     <div id={styles.menu}>
@@ -41,24 +44,24 @@ const Menu = ({ contextValue }) => {
             HOME
           </li>
 
-          {sectionsData.sections.map((section, index) => {
+          {contentfulData.map((section, index) => {
             return (
-              <li
-                className={currentSection === index + 1 ? styles.disable : null}
-                onClick={() => clickSection(index + 1)}
+              <li key={index}
+                className={currentSection === contentfulData[index].sys.id ? styles.disable : null}
+                onClick={() => clickSection(contentfulData[index].sys.id)}
               >
-                <nobr>{section.section}</nobr>
+                <nobr>{section.title}</nobr>
               </li>
             );
           })}
 
           <li>
             <a
-              href="http://google.com"
+              href="https://docs.google.com/document/d/11kjwoGzUeE2fdG-RVlZbNqDjqtAFp3ns9LjLX-H2EFc/edit"
               target="_blank"
               onClick={() => console.log("clicked")}
             >
-              Click me
+              Resume
             </a>
           </li>
         </ul>

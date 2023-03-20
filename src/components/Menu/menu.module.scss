@@ -126,12 +126,12 @@ nav {
       // transition-timing-function: ease-in-out;
       cursor: pointer;
       &.disable {
-        cursor: none;
+        // cursor: none;
         color: #636363 !important;
-        &:hover {
-          transform: none;
-          // color: 'white';
-        }
+        // &:hover {
+        //   transform: none;
+        //   // color: 'white';
+        // }
       }
       list-style: none;
       font-size: 30px;

@@ -10,6 +10,7 @@ const SmallFlower = ({
   key,
   item,
   layers,
+  content,
   glb,
   position,
   subFlowerLength,
@@ -18,8 +19,12 @@ const SmallFlower = ({
   ...props
 }) => {
   const [bloomState, setBloomState] = useState(false);
-  const { currentSection, setCurrentSubSection, currentSubSection } =
-    contextValue;
+  const {
+    currentSection,
+    setCurrentSubSection,
+    currentSubSection,
+    setCurrentSubSectionContent,
+  } = contextValue;
   const [hovered, setHover] = useState(false);
   useEffect(
     () => void (document.body.style.cursor = hovered ? "pointer" : "auto"),
@@ -34,15 +39,15 @@ const SmallFlower = ({
       currentSubSection ? false : currentSection === thisSection ? true : false
     );
   }, [currentSubSection]);
-  const onClick = (event, value) => {
+  const onClick = (event, value, item) => {
+    console.log("onClick",value)
     //   e.preventDefault();
     event.stopPropagation();
-    console.log("onclick subflower", value);
     setCurrentSubSection(value);
+    setCurrentSubSectionContent(item);
   };
   // console.log("subflower pos",position)
 
-  // console.log("smallflower props", props)
   // console.log("id",id)
 
   const onPointerOver = useCallback(() => setHover(true), []);
@@ -66,14 +71,13 @@ const SmallFlower = ({
       onPointerOver={onPointerOver}
       onPointerOut={onPointerOut}
       onClick={(e) => {
-        onClick(e, name);
+        onClick(e, name, content);
       }}
     >
       {Object.values(nodes).map((node, index) => {
         const meshGeometry = node.geometry;
         return meshGeometry ? (
           <Node
-            key={index}
             node={node}
             index={index}
             delay={0}

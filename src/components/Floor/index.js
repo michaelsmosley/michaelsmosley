@@ -6,8 +6,7 @@ import * as THREE from "three";
 
 export default function Floor(props) {
   const { contextValue } = props;
-  const { currentSubSection, currentSection } = contextValue;
-  console.log("currentSubSection", currentSubSection);
+  const { currentSubSection, currentSection, setFloorReady } = contextValue;
   const spring = useSpring({
     from: { rotation: [-Math.PI, 0, 0] },
     to: {
@@ -18,6 +17,7 @@ export default function Floor(props) {
       ],
 
     },
+    onRest: ()=>{setFloorReady(true)},
     config: {
       friction: 50,
     },

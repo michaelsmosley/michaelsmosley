@@ -24,7 +24,6 @@ const Flower = ({
   const [hovered, setHover] = useState(false);
   const [bloomState, setBloomState] = useState(bloomInit);
   const [flowerDelay, setFlowerDelay] = useState(delay);
-
   useEffect(() => {
     setBloomState(bloomInit);
   }, [bloomInit]);
@@ -49,7 +48,7 @@ const Flower = ({
   const onClick = (event, value) => {
     //   e.preventDefault();
     event.stopPropagation();
-    console.log("onclick flower", event);
+    console.log("onclick flower", id);
     setCurrentSection(id === currentSection ? 0 : id);
     // setCurrentSubSection(0);
   };
