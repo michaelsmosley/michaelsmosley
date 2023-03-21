@@ -70,6 +70,11 @@ const Sections = (props) => {
         : bloomInit
         ? defaultCameraProps
         : initCameraProps;
+        // console.log("sectionData.cameraPosition",sectionData.cameraPosition)
+
+        console.log("sectionData.cameraFOV",sectionData.cameraFOV)
+        // console.log("sectopstate.camera.fovmdata",state.camera.fov)
+
       let v = new THREE.Vector3();
       state.camera.fov = THREE.MathUtils.lerp(
         state.camera.fov,
@@ -78,14 +83,19 @@ const Sections = (props) => {
       );
       state.camera.position.lerp(
         v.set(
+                    
           sectionData.cameraPosition[0],
           sectionData.cameraPosition[1],
           sectionData.cameraPosition[2]
+          // -20,60,-100
         ),
         0.05
       );
       // state.camera.lookAt(sectionData.cameraLookAt);
       // state.camera.updateProjectionMatrix();
+      // state.camera.fov = sectionData.cameraFOV
+      state.camera.updateProjectionMatrix();
+
     }
   });
 

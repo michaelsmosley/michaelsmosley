@@ -7,7 +7,7 @@ import useLayers from "../../utils/use-layers";
 const SmallFlower = ({
   id,
   name,
-  key,
+  // key,
   item,
   layers,
   content,
@@ -80,6 +80,7 @@ const SmallFlower = ({
           <Node
             node={node}
             index={index}
+            key={index}
             delay={0}
             bloomState={bloomState}
             capTexture={"2E763A_78A0B7_B3D1CF_14F209"}

@@ -96,14 +96,18 @@ function Main(props) {
       // setCurrentSubSectionContent(null);
 
       setCurrentSubSection(0);
-
-      setCameraTarget(
-        currentSection ? contentfulData[index].cameraLookAt : [0, 0, 0]
-      );
+      console.log("index",index)
+            console.log("contentfulData[index].cameraLookAt",contentfulData[index].cameraLookAt)
+      // setCameraTarget(
+      //   currentSection ? contentfulData[index].cameraLookAt : [0, 0, 0]
+      // );
       setMenuActive(false);
     }
   }, [currentSection]);
 
+  useEffect(() => {
+    console.log("cameraTarget",cameraTarget)
+  }, [cameraTarget]);
 
   useEffect(() => {
     console.log("contentfulData", contentfulData);
@@ -161,6 +165,8 @@ function Main(props) {
             console.error(errors);
           }
           const mapArray = data.pageCollection.items.map((section) => {
+            console.log("section",section.cameraFov)
+            console.log("section",section.title)
             section.position = section.position ? section.position : [0, 0, 0];
             section.rotation = [0, 0, 0];
             section.scale = section.scale ? section.scale : [0.85, 0.85, 0.85];
@@ -171,7 +177,7 @@ function Main(props) {
             section.cameraPosition = section.cameraPosition
               ? section.cameraPosition
               : [5, 10, -18];
-            section.cameraFOV = 25;
+            section.cameraFOV = section.cameraFov ? section.cameraFov : 45;
             section.cameraLookAt = section.cameraLookAt
               ? section.cameraLookAt
               : [0, 0, 0];
@@ -224,7 +230,7 @@ function Main(props) {
       // make sure to catch any error
       .catch(console.error);
   }, []);
-
+console.log("camera target",cameraTarget)
   if (!contentfulData) {
     return "Loading...";
   }
@@ -327,6 +333,7 @@ const query = `{
       scale
       cameraPosition
       cameraLookAt
+      cameraFov
     }
   }
 }
