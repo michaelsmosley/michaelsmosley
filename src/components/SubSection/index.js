@@ -76,7 +76,7 @@ const SubSection = (props) => {
           : currentSubSectionContent.photo
           ? currentSubSectionContent.photo.image.title
           : currentSubSectionContent.skill
-          ? "skill"
+          ? currentSubSectionContent.skill.name
           : currentSubSectionContent.job
           ? currentSubSectionContent.job.company
           : null
@@ -87,7 +87,7 @@ const SubSection = (props) => {
         ? currentSubSectionContent.project
           ? "project"
           : currentSubSectionContent.skill
-          ? "skill"
+          ? currentSubSectionContent.skill.description
           : currentSubSectionContent.job
           ? currentSubSectionContent.job.jobTitle
           : null
@@ -99,7 +99,7 @@ const SubSection = (props) => {
         ? currentSubSectionContent.project
           ? "project"
           : currentSubSectionContent.skill
-          ? "skill"
+          ? "xxx "
           : currentSubSectionContent.job
           ? currentSubSectionContent.job.description.json.content[0].content[0].value
           : null
@@ -110,7 +110,7 @@ const SubSection = (props) => {
         ? currentSubSectionContent.project
           ? "project"
           : currentSubSectionContent.skill
-          ? "skill"
+          ? ""
           : currentSubSectionContent.job
           ? currentSubSectionContent.job.startDate
             ? getDate(currentSubSectionContent.job.startDate) +

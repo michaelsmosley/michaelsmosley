@@ -10,7 +10,7 @@ import Menu from "./components/Menu";
 import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import Title from "./components/Title";
 import { OrbitControls } from "@react-three/drei";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, useNavigate } from "react-router-dom";
 
 // import Rotate from "./components/Rotate";
 // import { sectionsData as sectionsData } from "./data/data";
@@ -20,6 +20,7 @@ extend({ TextGeometry });
 function Main(props) {
   let params = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
 
   const [bloomInit, setBloomInit] = useState(false);
   const [menuActive, setMenuActive] = useState(false);
@@ -54,6 +55,7 @@ function Main(props) {
   //     : null
   //   : null;
   const [currentSection, setCurrentSection] = useState(0);
+
   const [currentSubSectionContent, setCurrentSubSectionContent] =
     useState(null);
   // console.log("params.id",params.id)
@@ -89,56 +91,42 @@ function Main(props) {
     if (contentfulData) {
       var index =
         currentSection === 0
-          ? 0
-          : contentfulData.findIndex(
-              (section) => section.sys.id === currentSection
-            );
-      // setCurrentSubSectionContent(null);
-
+          ? "/"
+          : "/" +
+            contentfulData
+              .filter((section) => section.sys.id === currentSection)[0]
+              .title.toLowerCase();
+      console.log("index", index);
       setCurrentSubSection(0);
-      console.log("index",index)
-            console.log("contentfulData[index].cameraLookAt",contentfulData[index].cameraLookAt)
-      // setCameraTarget(
-      //   currentSection ? contentfulData[index].cameraLookAt : [0, 0, 0]
-      // );
       setMenuActive(false);
     }
+    navigate(index);
   }, [currentSection]);
 
   useEffect(() => {
-    console.log("cameraTarget",cameraTarget)
-  }, [cameraTarget]);
-
-  useEffect(() => {
-    console.log("contentfulData", contentfulData);
-    console.log("currentSection", currentSection);
-
-    setUrlSection(contentfulData
-    ? contentfulData.filter(
-        (section) =>
-          section.title.toLowerCase() ===
-          location.pathname.split("/")[1].toLowerCase()
-      )[0] !== undefined
-      ? contentfulData.filter(
-          (section) =>
-            section.title.toLowerCase() ===
-            location.pathname.split("/")[1].toLowerCase()
-        )[0].sys.id
-      : 'home'
-    : null);
+    if (contentfulData) {
+      console.log("contentfulData", contentfulData);
+      setUrlSection(location.pathname.split("/")[1].toLowerCase());
+    }
   }, [contentfulData]);
   useEffect(() => {
-    // console.log("currentSubSection useffect",currentSubSection)
     setMenuActive(false);
-    // if (!currentSubSection) {
-    //   setCurrentSubSectionContent(null);
-    // }
   }, [currentSubSection]);
 
   useEffect(() => {
-    console.log("urlSection",urlSection)
-    setCurrentSection(urlSection != 'home' ? urlSection : 0);
-    setBloomInit(urlSection ? true : false);
+    setCurrentSection(
+      contentfulData
+        ? contentfulData.filter(
+            (section) => section.title.toLowerCase() === urlSection
+          )[0] !== undefined
+          ? contentfulData.filter(
+              (section) => section.title.toLowerCase() === urlSection
+            )[0].sys.id
+          : 0
+        : 0
+    );
+
+    setBloomInit(urlSection != null ? true : false);
   }, [urlSection]);
 
   useEffect(() => {
@@ -165,8 +153,8 @@ function Main(props) {
             console.error(errors);
           }
           const mapArray = data.pageCollection.items.map((section) => {
-            console.log("section",section.cameraFov)
-            console.log("section",section.title)
+            // console.log("section", section.cameraFov);
+            // console.log("section", section.title);
             section.position = section.position ? section.position : [0, 0, 0];
             section.rotation = [0, 0, 0];
             section.scale = section.scale ? section.scale : [0.85, 0.85, 0.85];
@@ -230,7 +218,7 @@ function Main(props) {
       // make sure to catch any error
       .catch(console.error);
   }, []);
-console.log("camera target",cameraTarget)
+  // console.log("camera target", cameraTarget);
   if (!contentfulData) {
     return "Loading...";
   }

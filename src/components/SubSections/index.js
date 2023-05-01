@@ -10,17 +10,19 @@ const SubSections = (props) => {
   // const context = useContext(Context)
   const { position, thisSection, scale, contextValue, itemsCollection } = props;
   // console.log("itemsCollection",itemsCollection)
-  const {currentSection, bloomInit,  setCurrentSubSection, currentSubSection,}= contextValue
+  const { currentSection, bloomInit, setCurrentSubSection, currentSubSection } =
+    contextValue;
   const subArray = ["one", "two", "three", "four", "five"];
 
   const layers = [0, 11];
   // useEffect(() => {
   //   console.log("bloominit updated", bloomInit)
   // }, [bloomInit]);
-
   const r = 10;
-  const totalPoints = subArray.length;
-  const theta = -1* (Math.PI ) / totalPoints;
+  const totalPoints = itemsCollection.length;
+  // console.log("itemsCollection",itemsCollection)
+
+  const theta = (-1 * Math.PI*1.33) / totalPoints;
 
   const xPos = (currentPoint) => {
     var angle = theta * currentPoint;
@@ -35,9 +37,8 @@ const SubSections = (props) => {
   return (
     <group name="subflowers">
       {itemsCollection.map((item, index) => {
-
-// console.log("item",item)
-// console.log("index",index)
+        // console.log("item",item)
+        // console.log("index",index)
         return (
           <group key={index}>
             <SectionTitle
@@ -55,19 +56,23 @@ const SubSections = (props) => {
               bloomInit={bloomInit}
               height={4}
               hideIfNotCurrent={true}
-              capTexture={'04E804_04B504_04CB04_33FC33'}
+              capTexture={"04E804_04B504_04CB04_33FC33"}
               contextValue={contextValue}
             />
             <SubFlower
               key={index + 1}
               id={index + 1}
-              name={item.job
-                ? item.job.sys.id
-                : item.project
-                ? item.project.sys.id
-                : item.skill
-                ? item.skill.sys.id
-                : item.photo ? item.photo.sys.id : 0}
+              name={
+                item.job
+                  ? item.job.sys.id
+                  : item.project
+                  ? item.project.sys.id
+                  : item.skill
+                  ? item.skill.sys.id
+                  : item.photo
+                  ? item.photo.sys.id
+                  : 0
+              }
               {...item}
               content={item}
               layers={layers}

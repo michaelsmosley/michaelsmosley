@@ -1,24 +1,26 @@
+// @font-face {
+//   font-family: "Montserrat";
+//   font-style: light;
+//   font-weight: 500;
+//   src: local("Montserrat"),
+//     url(https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap)
+//       format("woff");
+// }
 #subSection {
   // background: #e74c3c;
-//   position: absolute;
+  //   position: absolute;
   overflow: auto;
   //   font-family: Montserrat;
   z-index: 5;
   color: white;
   width: 100%;
-//   height: 100%;
-  @font-face {
-    font-family: "Montserrat";
-    font-style: light;
-    font-weight: 500;
-    src: local("Montserrat"),
-      url(https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap)
-        format("woff");
-  }
+  //   height: 100%;
+  // font-family: 'Montserrat', Fallback, sans-serif;
+
   text-align: center;
   display: flex;
-    align-items: center;
-    flex-direction: column;
+  align-items: center;
+  flex-direction: column;
 }
 
 .fadeInText {
@@ -142,15 +144,15 @@
   //   background-color: rgba(29, 28, 28, 0.67);
   position: absolute;
   width: 100%;
-//   height: 100%;
+  //   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-shadow: 1px 1px #616161;
+  text-shadow: 2px 2px #616161;
   margin-top: 15%;
-    z-index: 9;
-	// margin-left:5%;
-	// margin-right:5%;
+  z-index: 9;
+  // margin-left:5%;
+  // margin-right:5%;
 }
 
 .overlay .title {

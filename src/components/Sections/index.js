@@ -72,7 +72,7 @@ const Sections = (props) => {
         : initCameraProps;
         // console.log("sectionData.cameraPosition",sectionData.cameraPosition)
 
-        console.log("sectionData.cameraFOV",sectionData.cameraFOV)
+        // console.log("sectionData.cameraFOV",sectionData.cameraFOV)
         // console.log("sectopstate.camera.fovmdata",state.camera.fov)
 
       let v = new THREE.Vector3();
@@ -83,7 +83,7 @@ const Sections = (props) => {
       );
       state.camera.position.lerp(
         v.set(
-                    
+                  // 90, 200, -350
           sectionData.cameraPosition[0],
           sectionData.cameraPosition[1],
           sectionData.cameraPosition[2]

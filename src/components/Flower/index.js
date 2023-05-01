@@ -19,7 +19,9 @@ const Flower = ({
   contextValue,
   ...props
 }) => {
-  const { setCurrentSection, bloomInit, currentSection, setCurrentSubSection, currentSubSection } =
+
+
+  const { setCurrentSection, bloomInit, currentSection,  currentSubSection } =
     contextValue;
   const [hovered, setHover] = useState(false);
   const [bloomState, setBloomState] = useState(bloomInit);
@@ -50,7 +52,7 @@ const Flower = ({
     event.stopPropagation();
     console.log("onclick flower", id);
     setCurrentSection(id === currentSection ? 0 : id);
-    // setCurrentSubSection(0);
+
   };
 
 
