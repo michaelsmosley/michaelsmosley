@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import styles from "./subsection.module.scss"; // Import css modules stylesheet as styles
 // import { sectionsData as sectionsData } from "../../data/data";
 import hoverEffect from "hover-effect";
+// import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
+// import { documentToPlainTextString } from '@contentful/rich-text-plain-text-renderer';
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+import { INLINES } from '@contentful/rich-text-types';
+
 
 const SubSection = (props) => {
   // console.log("SubSection",props)
@@ -14,7 +19,7 @@ const SubSection = (props) => {
   const { contextValue } = props;
   const { currentSubSection, currentSubSectionContent } = contextValue;
   // console.log("currentSubSection",currentSubSection)
-  // console.log("currentSubSectionContent",currentSubSectionContent)
+  console.log("-----------currentSubSectionContent",currentSubSectionContent)
 
   const mystyle = {
     width: "100%",
@@ -22,6 +27,20 @@ const SubSection = (props) => {
     position: "absolute",
     zIndex:1,
     // padding: "100px"
+  };
+
+  const options = {
+    renderText: (text) => {
+      return text.split('\n').reduce((children, textSegment, index) => {
+        return [...children, index > 0 && <br key={index} />, textSegment];
+      }, []);
+    },
+    renderNode: {
+      [INLINES.HYPERLINK]: (node) => {
+ 
+        return <a href={node.data.uri} target="_blank">{node.content[0].value}</a>
+      }
+    }
   };
   // const clickImage = () => {
   //   console.log("clickImage");
@@ -72,7 +91,7 @@ const SubSection = (props) => {
     setTitle(
       currentSubSectionContent
         ? currentSubSectionContent.project
-          ? "project"
+          ? currentSubSectionContent.project.title
           : currentSubSectionContent.photo
           ? currentSubSectionContent.photo.image.title
           : currentSubSectionContent.skill
@@ -85,7 +104,7 @@ const SubSection = (props) => {
     setSubTitle(
       currentSubSectionContent
         ? currentSubSectionContent.project
-          ? "project"
+          ? null
           : currentSubSectionContent.skill
           ? currentSubSectionContent.skill.description
           : currentSubSectionContent.job
@@ -97,7 +116,7 @@ const SubSection = (props) => {
     setBody(
       currentSubSectionContent
         ? currentSubSectionContent.project
-          ? "project"
+          ? documentToReactComponents(currentSubSectionContent.project.description.json, options)
           : currentSubSectionContent.skill
           ? "xxx "
           : currentSubSectionContent.job
@@ -108,7 +127,7 @@ const SubSection = (props) => {
     setSubTitle2(
       currentSubSectionContent
         ? currentSubSectionContent.project
-          ? "project"
+          ? null
           : currentSubSectionContent.skill
           ? ""
           : currentSubSectionContent.job
@@ -135,7 +154,7 @@ const SubSection = (props) => {
       </div> */}
 
       {currentSubSectionContent && currentSubSectionContent.photo ? (
-        <div class={`content ${currentSubSection}`} style={mystyle}></div>
+        <div className={`content ${currentSubSection}`} style={mystyle}></div>
       ) : null}
 
       <div className={currentSubSection === 0 ? `${styles.overlay} ${styles.fadeOutText}` : `${styles.overlay} ${styles.fadeInText}`}>

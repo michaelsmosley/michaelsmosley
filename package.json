@@ -3,9 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^16.0.3",
+    "@contentful/rich-text-plain-text-renderer": "^16.0.3",
+    "@contentful/rich-text-react-renderer": "^15.16.3",
+    "@contentful/rich-text-types": "^16.0.3",
     "@react-spring/core": "^9.4.4",
     "@react-spring/three": "^9.4.4",
     "@react-three/drei": "^9.0.1",
+    "contentful": "^10.1.3",
     "gsap": "^3.10.3",
     "hover-effect": "^1.1.0",
     "react": "^18.0.0",
@@ -23,7 +28,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-    },
+  },
   "eslintConfig": {
     "extends": [
       "react-app",

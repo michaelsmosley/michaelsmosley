@@ -56,6 +56,7 @@ export default function SectionTitle(props) {
     delay: 0,
   });
   // position={position} position-y={15*scale[0]}
+  console.log("section",section.photo ? section.photo.image :"no")
   return (
     <group {...props}>
       <AnimatedText
