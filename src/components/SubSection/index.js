@@ -53,7 +53,7 @@ const SubSection = (props) => {
 
   const getDate = (str) => {
     const date = new Date(str);
-    const dateStr = date.getMonth() + "/" + (-100 + date.getYear());
+    const dateStr = ("0" + (date.getMonth() + 1)).slice(-2) + "/" + (-100 + date.getYear()+2000);
 
     var now = new Date();
     if (date > now) {
