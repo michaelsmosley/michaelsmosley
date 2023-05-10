@@ -1,3 +1,4 @@
+/* eslint-disable array-callback-return */
 import React, { useState, useRef, useEffect } from "react";
 import { Canvas, extend } from "@react-three/fiber";
 import Context from "./context";
@@ -26,7 +27,8 @@ function Main(props) {
   const [menuActive, setMenuActive] = useState(false);
   const [floorReady, setFloorReady] = useState(false);
   const [contentfulData, setContentfulData] = useState(null);
-  const [cameraTarget, setCameraTarget] = useState([0, 0, 0]);
+  // const [cameraTarget, setCameraTarget] = useState([0, 0, 0]);
+  const cameraTarget=[0, 0, 0];
   const [urlSection, setUrlSection] = useState(null);
   // console.log(
   //   "contentfulData",
@@ -101,6 +103,7 @@ function Main(props) {
       setMenuActive(false);
     }
     navigate(index);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
   useEffect(() => {
@@ -108,6 +111,7 @@ function Main(props) {
       console.log("contentfulData", contentfulData);
       setUrlSection(location.pathname.split("/")[1].toLowerCase());
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contentfulData]);
   useEffect(() => {
     setMenuActive(false);
@@ -127,6 +131,7 @@ function Main(props) {
     );
 
     setBloomInit(urlSection != null ? true : false);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlSection]);
 
   useEffect(() => {
@@ -134,6 +139,8 @@ function Main(props) {
     const SPACEID = process.env.REACT_APP_CONTENTFUL_SPACE_ID;
 
     const fetchData = async () => {
+      console.log("--------fetchData")
+      // eslint-disable-next-line no-unused-vars
       const data = await fetch(
         `https://graphql.contentful.com/content/v1/spaces/${SPACEID}/environments/master?access_token=${TOKEN}`,
         {
@@ -173,17 +180,19 @@ function Main(props) {
               : [0, 0, 0];
             const items = section.itemsCollection.items;
             const subCollection = [];
-            items.map((item, index) => {
+            items.map((item, index) =>  {
               const query =
-                item.__typename == "Photo"
+                item.__typename === "Photo"
                   ? photoQuery(item.sys.id, index)
-                  : item.__typename == "Skill"
+                  : item.__typename === "Skill"
                   ? skillQuery(item.sys.id, index)
-                  : item.__typename == "Job"
+                  : item.__typename === "Job"
                   ? jobQuery(item.sys.id, index)
                   : projectQuery(item.sys.id, index);
 
               const itemData = async () => {
+                console.log("itemData")
+                // eslint-disable-next-line no-unused-vars
                 const getit = await fetch(
                   `https://graphql.contentful.com/content/v1/spaces/${SPACEID}/environments/master?access_token=${TOKEN}`,
                   {
