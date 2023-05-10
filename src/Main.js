@@ -149,6 +149,8 @@ function Main(props) {
       )
         .then((response) => response.json())
         .then(({ data, errors }) => {
+                  console.log("data", data);
+
           if (errors) {
             console.error(errors);
           }
@@ -213,12 +215,12 @@ function Main(props) {
           // rerender the entire component with new data
           setContentfulData(mapArray);
         });
+
     };
     fetchData()
       // make sure to catch any error
       .catch(console.error);
   }, []);
-  // console.log("camera target", cameraTarget);
   if (!contentfulData) {
     return "Loading...";
   }
@@ -276,7 +278,7 @@ function Main(props) {
             </group>
             <Button
               contextValue={contextValue}
-              position={[0, 3, 0]}
+              position={[0, 15, 0]}
               rotation={[-Math.PI / 2, 0, 0]}
               physicalMaterial={{
                 color: "#71f604",
@@ -287,7 +289,7 @@ function Main(props) {
             />
             <Floor contextValue={contextValue} />
             <OrbitControls
-              target={currentSubSection ? [0, 5, 0] : cameraTarget}
+              target={currentSubSection ? [0, 20, 0] : cameraTarget}
               ref={controlsRef}
               enableRotate={currentSubSection ? false : true}
               enableZoom={false}
@@ -400,6 +402,7 @@ const skillQuery = (id, index) => {
   return `{ 
     
    skill(id: "${id}") {
+    description
     sys {
       id
     }

@@ -176,6 +176,19 @@ img {
   width: 100%;
   // height: 100%;
 }
+.backCTA {
+  background: black;
+  padding: 5px;
+  border: white;
+  border-width: 1px;
+  border-style: solid;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.backCTA:hover {
+  background-color: grey;
+}
 
 // *,
 // *::after,

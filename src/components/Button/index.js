@@ -20,7 +20,7 @@ const Button = ({
   ...props
 }) => {
   const [bloomState, setBloomState] = useState(false);
-  const { setCurrentSubSection, currentSubSection, currentSection } =
+  const { setCurrentSubSection, currentSubSection } =
     contextValue;
   const [hovered, setHover] = useState(false);
   useEffect(
@@ -31,7 +31,7 @@ const Button = ({
     setBloomState(currentSubSection ? true : false);
   }, [currentSubSection]);
   const onClick = (event, value) => {
-    console.log("onclick currentSection", currentSection);
+    // console.log("onclick currentSection", currentSection);
     //   e.preventDefault();
     event.stopPropagation();
     setCurrentSubSection(0);
