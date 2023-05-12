@@ -27,8 +27,8 @@ function Main(props) {
   const [menuActive, setMenuActive] = useState(false);
   const [floorReady, setFloorReady] = useState(false);
   const [contentfulData, setContentfulData] = useState(null);
-  // const [cameraTarget, setCameraTarget] = useState([0, 0, 0]);
-  const cameraTarget=[0, 0, 0];
+  const [cameraTarget, setCameraTarget] = useState([0, 0, 0]);
+  // const cameraTarget=[0, 0, 0];
   const [urlSection, setUrlSection] = useState(null);
   // console.log(
   //   "contentfulData",
@@ -84,6 +84,7 @@ function Main(props) {
     setFloorReady: setFloorReady,
     setCurrentSubSectionContent: setCurrentSubSectionContent,
     currentSubSectionContent: currentSubSectionContent,
+    // setCameraTarget: setCameraTarget,
   };
   const controlsRef = useRef();
 
@@ -98,12 +99,19 @@ function Main(props) {
             contentfulData
               .filter((section) => section.sys.id === currentSection)[0]
               .title.toLowerCase();
+      const section = currentSection
+        ? contentfulData.findIndex(
+            (section) => section.sys.id === currentSection
+          )
+        : 0;
       console.log("index", index);
+      console.log("contentfulData[section]", contentfulData[section]);
       setCurrentSubSection(0);
+      setCameraTarget(currentSection ? contentfulData[section].position : [0,0,0])
       setMenuActive(false);
     }
     navigate(index);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentSection]);
 
   useEffect(() => {
@@ -111,7 +119,7 @@ function Main(props) {
       console.log("contentfulData", contentfulData);
       setUrlSection(location.pathname.split("/")[1].toLowerCase());
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [contentfulData]);
   useEffect(() => {
     setMenuActive(false);
@@ -131,7 +139,7 @@ function Main(props) {
     );
 
     setBloomInit(urlSection != null ? true : false);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [urlSection]);
 
   useEffect(() => {
@@ -139,7 +147,7 @@ function Main(props) {
     const SPACEID = process.env.REACT_APP_CONTENTFUL_SPACE_ID;
 
     const fetchData = async () => {
-      console.log("--------fetchData")
+      console.log("--------fetchData");
       // eslint-disable-next-line no-unused-vars
       const data = await fetch(
         `https://graphql.contentful.com/content/v1/spaces/${SPACEID}/environments/master?access_token=${TOKEN}`,
@@ -156,7 +164,7 @@ function Main(props) {
       )
         .then((response) => response.json())
         .then(({ data, errors }) => {
-                  console.log("data", data);
+          console.log("data", data);
 
           if (errors) {
             console.error(errors);
@@ -180,7 +188,7 @@ function Main(props) {
               : [0, 0, 0];
             const items = section.itemsCollection.items;
             const subCollection = [];
-            items.map((item, index) =>  {
+            items.map((item, index) => {
               const query =
                 item.__typename === "Photo"
                   ? photoQuery(item.sys.id, index)
@@ -191,7 +199,7 @@ function Main(props) {
                   : projectQuery(item.sys.id, index);
 
               const itemData = async () => {
-                console.log("itemData")
+                console.log("itemData");
                 // eslint-disable-next-line no-unused-vars
                 const getit = await fetch(
                   `https://graphql.contentful.com/content/v1/spaces/${SPACEID}/environments/master?access_token=${TOKEN}`,
@@ -224,7 +232,6 @@ function Main(props) {
           // rerender the entire component with new data
           setContentfulData(mapArray);
         });
-
     };
     fetchData()
       // make sure to catch any error

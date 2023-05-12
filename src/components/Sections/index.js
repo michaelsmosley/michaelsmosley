@@ -11,15 +11,10 @@ import * as THREE from "three";
 // import Context from '../../context';
 
 const Sections = (props) => {
-
   // const context = useContext(Context)
   const { bloomInit, contextValue, controlsRef } = props;
-  const {
-    currentSection,
-    isMobile,
-    currentSubSection,
-    contentfulData
-  } = contextValue;
+  const { currentSection, isMobile, currentSubSection, contentfulData, setCameraTarget } =
+    contextValue;
   const [dragging, setDragging] = useState(false);
 
   useEffect(() => {
@@ -36,10 +31,6 @@ const Sections = (props) => {
       };
     }
   }, [controlsRef]);
-
-
-
-
 
   const layers = [0, 11];
   const defaultCameraProps = {
@@ -60,20 +51,22 @@ const Sections = (props) => {
   useFrame((state) => {
     if (!dragging) {
       var index =
-      currentSection === 0
-        ? 0
-        : contentfulData.findIndex(
-            (section) => section.sys.id === currentSection
-          );
-      let sectionData = currentSubSection ? topCameraProps : currentSection
+        currentSection === 0
+          ? 0
+          : contentfulData.findIndex(
+              (section) => section.sys.id === currentSection
+            );
+      let sectionData = currentSubSection
+        ? topCameraProps
+        : currentSection
         ? contentfulData[index]
         : bloomInit
         ? defaultCameraProps
         : initCameraProps;
-        // console.log("sectionData.cameraPosition",sectionData.cameraPosition)
+      // console.log("sectionData.cameraPosition",sectionData.cameraPosition)
 
-        // console.log("sectionData.cameraFOV",sectionData.cameraFOV)
-        // console.log("sectopstate.camera.fovmdata",state.camera.fov)
+      // console.log("sectionData.cameraFOV",sectionData.cameraFOV)
+      // console.log("sectopstate.camera.fovmdata",state.camera.fov)
 
       let v = new THREE.Vector3();
       state.camera.fov = THREE.MathUtils.lerp(
@@ -83,7 +76,7 @@ const Sections = (props) => {
       );
       state.camera.position.lerp(
         v.set(
-                  // 90, 200, -350
+          // 90, 200, -350
           sectionData.cameraPosition[0],
           sectionData.cameraPosition[1],
           sectionData.cameraPosition[2]
@@ -95,15 +88,12 @@ const Sections = (props) => {
       // state.camera.updateProjectionMatrix();
       // state.camera.fov = sectionData.cameraFOV
       state.camera.updateProjectionMatrix();
-
     }
   });
 
   return (
     <group name="sections">
       {contentfulData.map((section, index) => {
-   
-
         return (
           <group key={index} name="section">
             <SectionTitle
