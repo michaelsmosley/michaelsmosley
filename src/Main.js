@@ -107,7 +107,8 @@ function Main(props) {
       console.log("index", index);
       console.log("contentfulData[section]", contentfulData[section]);
       setCurrentSubSection(0);
-      setCameraTarget(currentSection ? contentfulData[section].position : [0,0,0])
+      setCameraTarget(currentSection ? contentfulData[section].position
+         : [0,0,0])
       setMenuActive(false);
     }
     navigate(index);

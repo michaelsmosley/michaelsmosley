@@ -210,3 +210,19 @@ nav.show {
 //     animation-delay: 300ms;
 //   }
 // }
+
+.resumeCTA {
+  top: 30px;
+  right: 15px;
+  position:absolute;
+  color: white;
+  z-index: 9;
+}
+
+// .resumeCTA a {
+//   -webkit-transition: color 1s; /* For Safari 3.0 to 6.0 */
+//   transition: color 1s; /* For modern browsers */
+// }
+// .resumeCTA a:hover {
+//   color: #ff0000;
+// }

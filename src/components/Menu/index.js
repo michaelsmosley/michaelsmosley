@@ -34,6 +34,13 @@ const Menu = ({ contextValue }) => {
         ></div>
         <div className={styles.clear}></div>
       </div>
+      <div className={styles.resumeCTA}><a
+              href="https://docs.google.com/document/d/11kjwoGzUeE2fdG-RVlZbNqDjqtAFp3ns9LjLX-H2EFc/edit"
+              target="_blank"
+              onClick={() => console.log("clicked")}
+            >
+              MY RESUME
+            </a></div>
 
       <nav id="nav" className={`${menuActive ? styles.show : null}`}>
         <ul>
