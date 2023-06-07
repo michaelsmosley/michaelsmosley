@@ -12,10 +12,12 @@ import { TextGeometry } from "three/examples/jsm/geometries/TextGeometry";
 import Title from "./components/Title";
 import { OrbitControls } from "@react-three/drei";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
-
+import styles from './main.module.scss';
 // import Rotate from "./components/Rotate";
 // import { sectionsData as sectionsData } from "./data/data";
 
+
+console.log("styles,", styles)
 extend({ TextGeometry });
 
 function Main(props) {
@@ -107,8 +109,9 @@ function Main(props) {
       console.log("index", index);
       console.log("contentfulData[section]", contentfulData[section]);
       setCurrentSubSection(0);
-      setCameraTarget(currentSection ? contentfulData[section].position
-         : [0,0,0])
+      setCameraTarget(
+        currentSection ? contentfulData[section].position : [0, 0, 0]
+      );
       setMenuActive(false);
     }
     navigate(index);
@@ -239,7 +242,11 @@ function Main(props) {
       .catch(console.error);
   }, []);
   if (!contentfulData) {
-    return "Loading...";
+    return (
+      <div className={styles.loaderContainer}>
+        <div className={styles.spinner}></div>
+      </div>
+    );
   }
   return (
     <Context.Provider value={contextValue}>
