@@ -91,7 +91,7 @@ function Main(props) {
   const controlsRef = useRef();
 
   useEffect(() => {
-    console.log("currentSection", currentSection);
+    console.log("-----useEffect currentSection", currentSection);
 
     if (contentfulData) {
       var index =
@@ -106,8 +106,8 @@ function Main(props) {
             (section) => section.sys.id === currentSection
           )
         : 0;
-      console.log("index", index);
-      console.log("contentfulData[section]", contentfulData[section]);
+      // console.log("index", index);
+      // console.log("contentfulData[section]", contentfulData[section]);
       setCurrentSubSection(0);
       setCameraTarget(
         currentSection ? contentfulData[section].position : [0, 0, 0]
@@ -120,7 +120,6 @@ function Main(props) {
 
   useEffect(() => {
     if (contentfulData) {
-      console.log("contentfulData", contentfulData);
       setUrlSection(location.pathname.split("/")[1].toLowerCase());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -232,7 +231,7 @@ function Main(props) {
 
             return section;
           });
-
+console.log("now set contentfuldata")
           // rerender the entire component with new data
           setContentfulData(mapArray);
         });
